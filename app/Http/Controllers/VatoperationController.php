@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\vatoperation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class VatoperationController extends Controller
 {
@@ -14,10 +15,36 @@ class VatoperationController extends Controller
      */
     public function index()
     {
-     $vatdata=vatoperation::all();
-     return view('clientuser.vatinfo', compact('vatdata'));
+    $vatdata=vatoperation::all();
+    if(is_null($vatdata)){
+    return array("message"=>"not found");
     }
+    
+     else{
+        return view('clientuser.vatinfo', compact('vatdata'));
 
+     }  
+    }
+    public function vattoken(vatoperation $token){
+        //$vattoken=vatoperation::pluck('id'); //returns on fetching all contents of that particular column
+        //$vattoken=vatoperation::where('id',5)->first(); //returns on fetching all contents of that particular row
+       // $vattoken=vatoperation::pluck('id','tokenss');
+       //;dd($token);
+       
+
+       
+       //$vatinfo=vatoperation::where('id','=', 5)->first();
+       
+       if($vatinfo->tokenss==$vat->tokenss){
+           return("matched");
+
+       }
+       else{
+        return ("error");
+       }
+       
+       // return array('clientuser.vattoken', compact('vattoken'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -41,6 +68,7 @@ class VatoperationController extends Controller
         $vat->quantity=$request->input('quantity');
         $vat->peritemprice=$request->input('price');
         $vat->vatrate=$request->input('vatpercent');
+        $vat->tokenss=md5(md5(md5(Str::random(70))));
         $vat->save();
         //vatoperation::create($request->all());
         if($vat->save()){
