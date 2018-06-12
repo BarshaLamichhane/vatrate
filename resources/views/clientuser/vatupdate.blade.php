@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>VAT</title>
+    <title>VAT TOKEN</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,41 +13,34 @@
     <script src="https://unpkg.com/sweetalert2@7.20.7/dist/sweetalert2.all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script>
-        function buttonClicked(row){
-           
-          window.location='/vatdelete/'+row;
-        }
-       
-    </script>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="card" style="max-width: 50rem;">
                 <div class="card-header">
-                    <h1>VAT entry</h1>
+                    <h1>VAT update</h1>
                 </div>
                 <div class="card-body">
-                    <table>
+                    <!--<table>
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Qunatity</td>
-                                <td>per price</td>
-                                <td>vat percntage</td>
-                                @foreach($vatdata as $row) 
+                                <td>update</td>
+                                
+                               
                                 <tr>
-                                <td><h4>{{$row['itemname']}}</h4></td>
-                                <td><h3>{{$row['quantity']}}</h3></td>
-                                <td><h4> {{$row['peritemprice']}} <h4><td>
-                                <td><h4> {{$row['vatrate']}} <h4><td>
-                                <td><button type="button" onClick="buttonClicked({{ $row['id']}})" >Delete</button></td>
+                                <td><h4></h4></td> 
                                 <tr>
-                            @endforeach
+                           
                             </tr>
                         </thead>
-                    </table>
+                    </table>-->
+                <form action="/vatupdate/{{$idd->id}}" method="POST">
+                    {{ csrf_field() }}
+                            <input type="text" name="updatedvatrate" value="{{$idd->vatrate}}">
+                            <input type="submit" value="save">
+                    </form>
+                   
                 </div>
             </div>
         </div>

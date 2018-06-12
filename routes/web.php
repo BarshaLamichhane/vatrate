@@ -27,4 +27,8 @@ Route::get('/vatcreate',[
 Route::post('/vatsave','VatoperationController@store');
 Route::get('/vatdata','VatoperationController@index');
 Route::get('/vattoken','VatoperationController@vattoken');
+//Route::get('/vatupdate/{vatoperation}','VatoperationController@update');
+Route::get('/vatoperations/{idd}','VatoperationController@vatupdate');
+Route::post('/vatupdate/{vatoperation}','VatoperationController@update');
+Route::get('/vatdelete/{vatoperation}', 'VatoperationController@destroy');
 

@@ -22,7 +22,8 @@
                     <h1>VAT entry</h1>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="vatsave" enctype="multipart/form-data">
+                    <form method="post" action="/vatsave" enctype="multipart/form-data">
+                        {{ csrf_field() }}
                         <div class="form-row">
                             <div class="form-group col-sm-12  col-md-12 col-lg-12">
                                 <label><b>Item Name:</b></label>
