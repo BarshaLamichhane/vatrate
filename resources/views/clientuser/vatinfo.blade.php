@@ -18,6 +18,13 @@
            
           window.location='/vatdelete/'+row;
         }
+        $(document).ready(function(){
+           
+           $('p.alert').delay(3000).slideUp(300);
+
+           // $('p.alert').delay(3000).slideUp(300);
+
+        });
        
     </script>
 </head>
@@ -25,10 +32,14 @@
     <div class="container">
         <div class="row">
             <div class="card" style="max-width: 50rem;">
+
                 <div class="card-header">
                     <h1>VAT entry</h1>
                 </div>
                 <div class="card-body">
+                        @if(Session::has('message'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                        @endif
                     <table>
                         <thead>
                             <tr>

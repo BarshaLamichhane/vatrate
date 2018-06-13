@@ -13,6 +13,13 @@
     <script src="https://unpkg.com/sweetalert2@7.20.7/dist/sweetalert2.all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('p.alert').delay(3000).slideUp(300);
+
+        });
+        
+    </script>
 </head>
 <body>
     <div class="container">
@@ -22,6 +29,9 @@
                     <h1>VAT entry</h1>
                 </div>
                 <div class="card-body">
+                        @if(Session::has('message'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                        @endif
                     <form method="post" action="/vatsave" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-row">

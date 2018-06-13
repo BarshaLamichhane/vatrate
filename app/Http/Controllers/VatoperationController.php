@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\vatoperation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Session;
 
 class VatoperationController extends Controller
 {
@@ -71,9 +72,13 @@ class VatoperationController extends Controller
         $vat->vatrate=$request->input('vatpercent');
         $vat->tokenss=md5(md5(md5(Str::random(70))));
         $vat->save();
+        Session::flash('message', 'This is a message!'); 
+        Session::flash('alert-class', 'alert-success'); 
+
         //vatoperation::create($request->all());
         if($vat->save()){
-            return array("message" =>"success");
+            //return array("message" =>"success");
+            return redirect('/vatcreate')->with('message', 'vatdata saved successfully! You can enter new data now');
         }
         else{
             return array("message"=> "failed");
@@ -157,12 +162,18 @@ class VatoperationController extends Controller
      */
     public function destroy(vatoperation $vatoperation)
     {
-       vatoperation::where('id',$vatoperation->id)->delete();
-      return array("deleted successfully");
+       $vatdelete=vatoperation::where('id',$vatoperation->id)->delete();
+       Session::flash('message', 'This is a message!'); 
+       Session::flash('alert-class', 'alert-success'); 
+       if($vatdelete){
+        return redirect('/vatdata')->with('message','Data with corresponding ID deleted');
+       }
+     
        
     }
     public function delete(){
         return array("i will destroy");
 
     }
+    
 }

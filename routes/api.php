@@ -20,7 +20,6 @@ use Illuminate\Http\Request;
    // return view('adminuser/vatui');
 //});
 //Route::auth();
-Route::get('/vatcreate','VatoperationController@create');
-Route::post('/vatsave','VatoperationController@store');
-Route::get('/vatdata','VatoperationController@index');
-   
+//Route::get('vatapidata','VatapiController@index');
+Route::resources(['vatoperation'=>'VatapiController']);
+
